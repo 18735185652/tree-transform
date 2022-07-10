@@ -95,3 +95,21 @@ export const filterCategoryData = (selectKeys, data, type, disabled) => {
   });
   return newData;
 };
+
+
+export function treeTransform(obj){
+  let rootMenu = [];
+  let map = {};
+  obj.forEach(resource=>{
+    resource.children = [];
+    map[resource.id] = resource;
+
+    if(resource.parent_id === null){
+      rootMenu.push(resource)
+    }else {
+      map[resource.parent_id].children.push(resource)
+    }
+  })
+
+  return rootMenu;
+}

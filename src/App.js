@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Tabs, Button } from 'antd';
 import TreeTransfer from './component/TreeTransfer';
 import FnTreeTransfer from './component/FnTreeTransfer';
+import Transfer from './component/Transfer';
+
 import './app.css';
 
 const { TabPane } = Tabs;
@@ -16,6 +18,44 @@ const mockData = [
     key: '2',
   },
 ];
+
+let dataList = [
+  {
+    id: '1',
+    parent_id: null,
+    key: '1',
+    title: '权限管理',
+  },
+  {
+    id: '2',
+    parent_id: '1',
+    key: '1.2',
+    title: '用户管理',
+  },
+  {
+    id: '3',
+    parent_id: '1',
+    key: '1.3',
+    title: '角色管理',
+  },
+  {
+    id: '4',
+    parent_id: '3',
+    key: '1.3.4',
+    title: '订单管理',
+  },
+  {
+    id: '5',
+    parent_id: '3',
+    key: '1.3.5',
+    title: '商品管理',
+  },
+];
+
+
+
+
+
 export default class TreeTransferExer extends Component {
   state = {
     values: ['1-0-0', '2-0-0'], // 受控使用时的values
@@ -78,7 +118,7 @@ export default class TreeTransferExer extends Component {
     const { values } = this.state;
     return (
       <div className="container">
-        <Tabs defaultActiveKey="normal">
+        {/* <Tabs defaultActiveKey="normal">
           <TabPane tab="普通使用" key="normal">
             <TreeTransfer
               loadData={this.onLoadData}
@@ -131,11 +171,18 @@ export default class TreeTransferExer extends Component {
               rightDisabled
             />
           </TabPane>
-        </Tabs>
+        </Tabs> */}
         <div style={{ padding: 24 }}>
           <FnTreeTransfer
             dataSource={this.state.dataSource}
             onLoadData={this.onLoadData}
+            title={['左侧标题', '右侧标题']}
+            onMove={this.onMove}
+          />
+        </div>
+        <div style={{ padding: 24 }}>
+          <Transfer
+            dataSource={dataList}
             title={['左侧标题', '右侧标题']}
             onMove={this.onMove}
           />
